@@ -10,6 +10,9 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    if @company.zip_code.present?
+      @zip_data = ZipCodes.identify(@company.zip_code)
+    end
   end
 
   def create
@@ -28,9 +31,19 @@ class CompaniesController < ApplicationController
     if @company.update(company_params)
       redirect_to companies_path, notice: "Changes Saved"
     else
+      flash[:error] = "#{@company.errors.full_messages.join(', ')}"
       render :edit
     end
   end  
+
+  def destroy
+    if @company.destroy
+      redirect_to companies_path, notice: 'Company Destroyed Successfully'
+    else
+      flash[:error] = "#{@company.errors.full_messages.join(', ')}"
+      redirect_to company_path(@company)
+    end
+  end
 
   private
 

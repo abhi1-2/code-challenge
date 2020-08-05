@@ -11,7 +11,11 @@
   <div class="bg-success">
     <div class="container p-5 text-white">
       <h1><%= @company.name %></h1>
-      <h3>City, State</h3>
+      <% if @zip_data.present? %>
+        <h3><%= @zip_data[:state_name] %>,<%= @zip_data[:city] %></h3>
+      <%else%>
+        <h3>City, State</h3>
+      <%end%>
       <pre>☝️ This is what needs to be udpated. Examples: Atlanta, GA or Nashvile, TN</pre>
     </div>
   </div>
