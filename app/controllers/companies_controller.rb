@@ -20,6 +20,7 @@ class CompaniesController < ApplicationController
     if @company.save
       redirect_to companies_path, notice: "Saved"
     else
+      flash[:error] = "#{@company.errors.full_messages.join(', ')}"
       render :new
     end
   end
