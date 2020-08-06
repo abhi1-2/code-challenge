@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
   has_rich_text :description
   validates :email, allow_blank: true, email: true
+  validates :name, :zip_code, presence: :true
   before_save :update_city_state, if: :zip_code_changed?
 
   private

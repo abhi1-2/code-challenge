@@ -4,14 +4,20 @@
   <% if @companies.empty? %>
   <p>No Companies Found</p>
   <% else %>
-    <ul class="list-group my-5">
+    <ul class="list-group my-5 ">
+
       <% @companies.each do |company| %>
+      <div class="row"> 
+        <div class="col-md-11">
         <a href="<%= company_path(company) %>" class="list-group-item list-group-item-action">
           <%= company.name %>
         </a>
-        <div class="col text-right">
+      </div>
+        
+        <div class="col-md-1 text-right" style="margin-top: 5px">
            <%= link_to "Delete", company_path(company), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you Sure?'}, title: "Delete #{@company}"%>
-    </div>
+        </div>
+      </div>
       <% end %>
     </ul>
   <% end %>
